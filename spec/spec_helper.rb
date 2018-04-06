@@ -12,5 +12,9 @@ RSpec.configure do |config|
     stub_const("SpotifyTool", FakeSpotify)
   end
 
+  config.before :each, type: :request do
+    FakeSms.messages = []
+  end
+
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end

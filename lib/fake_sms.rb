@@ -9,4 +9,8 @@ module FakeSms
   def self.messages
     @messages
   end
+
+  def self.messages=(value)
+    @messages = value
+  end
 end
