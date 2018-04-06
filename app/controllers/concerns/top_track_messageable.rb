@@ -22,7 +22,7 @@ module TopTrackMessageable
     end
 
     def extract_sms_message_from_tracks(tracks)
-      msg = "This is a message from Spotify. The following are the top tracks by #{@artist_top_track_request.artist_name}: "
+      msg = "Top tracks by #{@artist_top_track_request.artist_name}: "
       msg += tracks.map do |track|
         "- #{track.name}, popularity of #{track.popularity} from the #{track.album.name} album."
       end.join
