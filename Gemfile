@@ -50,3 +50,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'twilio-ruby'
 gem 'rspotify', '~> 2.0'
+gem 'rack-cors', :require => 'rack/cors'
