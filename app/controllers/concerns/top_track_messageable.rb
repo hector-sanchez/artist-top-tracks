@@ -1,25 +1,21 @@
 module TopTrackMessageable
   extend ActiveSupport::Concern
 
-  included do
-    after_action :sms_top_tracks
+  def sms_top_tracks
+    if @artist_top_track_request
+      tracks = artist_top_tracks
+
+      if tracks.empty?
+        message = "There are no available tracks in the US region for #{@artist_top_track_request.artist_name}."
+      else
+        message = extract_sms_message_from_tracks(tracks)
+      end
+
+      SmsTool.send_sms(number: @artist_top_track_request.cell_phone_number, message: message)
+    end
   end
 
   private
-
-    def sms_top_tracks
-      if @artist_top_track_request
-        tracks = artist_top_tracks
-
-        if tracks.empty?
-          message = "There are no available tracks in the US region for #{@artist_top_track_request.artist_name}."
-        else
-          message = extract_sms_message_from_tracks(tracks)
-        end
-
-        SmsTool.send_sms(number: @artist_top_track_request.cell_phone_number, message: message)
-      end
-    end
 
     def extract_sms_message_from_tracks(tracks)
       msg = "Top tracks by #{@artist_top_track_request.artist_name}: "

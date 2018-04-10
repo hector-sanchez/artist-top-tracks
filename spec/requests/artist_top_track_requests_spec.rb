@@ -16,7 +16,7 @@ RSpec.describe 'Artist Top Tracks Request', type: :request do
       end
 
       it 'sends sms message with artist not found message' do
-        expect(SmsTool.messages.last.message).to match(/There are no available tracks in the US region for invalid artist./)
+        expect(SmsTool.message.message).to match(/There are no available tracks in the US region for invalid artist./)
       end
     end
 
@@ -34,7 +34,7 @@ RSpec.describe 'Artist Top Tracks Request', type: :request do
       end
 
       it 'sends sms message' do
-        expect(SmsTool.messages).to_not be_empty
+        expect(SmsTool.message).to_not be_nil
       end
     end
 
